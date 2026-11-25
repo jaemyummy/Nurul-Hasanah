@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kas Kelompok | Simpan Pinjam, Iuran & Rekap</title>
+  <style>
+    :root {
+      --hijau: #166534;
+      --hijau-tua: #14532d;
+      --hijau-muda: #ecfdf5;
+      --teks: #1f2937;
+      --abu: #6b7280;
+      --garis: #d1d5db;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Arial, sans-serif;
+      color: var(--teks);
+      background: #f3f4f6;
+    }
+
+    .page {
+      max-width: 1150px;
+      margin: 0 auto;
+      padding: 24px 16px 40px;
+    }
+
+    .header {
+      background: linear-gradient(135deg, #166534, #15803d);
+      color: #fff;
+      padding: 28px 24px;
+      border-radius: 16px;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .header h1 {
+      margin: 0 0 8px;
+      font-size: 28px;
+    }
+
+    .header p {
+      margin: 0;
+      opacity: .9;
+    }
+
+    .tabs {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .tab-button {
+      border: 1px solid var(--garis);
+      background: #fff;
+      color: var(--teks);
+      padding: 14px 10px;
+      border-radius: 12px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: .2s;
+    }
+
+    .tab-button:hover {
+      border-color: var(--hijau);
+      color: var(--hijau);
+    }
+
+    .tab-button.active {
+      background: var(--hijau);
+      border-color: var(--hijau);
+      color: #fff;
+    }
+
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    .section {
+      background: #fff;
+      border: 1px solid var(--garis);
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, .05);
+    }
+
+    .section-title {
+      margin: 0 0 6px;
+      color: var(--hijau);
+      font-size: 20px;
+    }
+
+    .section-desc {
+      margin: 0 0 16px;
+      font-size: 14px;
+      color: var(--abu);
+    }
+
+    .form-frame,
+    .sheet-frame {
+      width: 100%;
+      border: 0;
+      border-radius: 12px;
+      background: #fff;
+    }
+
+    .form-frame {
+      height: 1400px;
+    }
+
+    .sheet-frame {
+      height: 650px;
+    }
+
+    .note {
+      margin-top: 10px;
+      font-size: 13px;
+      color: var(--abu);
+    }
+
+    footer {
+      text-align: center;
+      font-size: 13px;
+      color: var(--abu);
+      margin-top: 8px;
+    }
+
+    @media (max-width: 640px) {
+      .tabs {
+        grid-template-columns: 1fr;
+      }
+
+      .form-frame {
+        height: 1700px;
+      }
+
+      .sheet-frame {
+        height: 520px;
+      }
+
+      .header h1 {
+        font-size: 22px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page">
+
+    <header class="header">
+      <h1>Kas Kelompok</h1>
+      <p>Simpan Pinjam Kelompok &bull; Iuran Kelompok &bull; Rekap Kas</p>
+    </header>
+
+    <div class="tabs">
+      <button class="tab-button active" onclick="bukaTab('simpan-pinjam', this)">
+        💰 Simpan Pinjam
+      </button>
+
+      <button class="tab-button" onclick="bukaTab('iuran-kelompok', this)">
+        🧾 Iuran Kelompok
+      </button>
+
+      <button class="tab-button" onclick="bukaTab('rekap-kas', this)">
+        📊 Rekap Kas
+      </button>
+    </div>
+
+    <!-- ================= SIMPAN PINJAM ================= -->
+    <div id="simpan-pinjam" class="tab-content active">
+
+      <section class="section">
+        <h2 class="section-title">💰 Formulir Simpan Pinjam Kelompok</h2>
+        <p class="section-desc">
+          Isi data simpanan, pinjaman, angsuran, atau pembayaran simpan pinjam kelompok.
+        </p>
+
+        <iframe
+          class="form-frame"
+          src="GANTI_URL_FORM_SIMPAN_PINJAM"
+          loading="lazy"
+          title="Formulir Simpan Pinjam Kelompok">
+        </iframe>
+
+        <p class="note">
+          Ganti <code>GANTI_URL_FORM_SIMPAN_PINJAM</code> dengan kode embed Google Form Simpan Pinjam.
+        </p>
+      </section>
+
+      <section class="section">
+        <h2 class="section-title">📋 Spreadsheet Simpan Pinjam Kelompok</h2>
+        <p class="section-desc">
+          Rekap data simpan pinjam kelompok akan tampil pada tabel berikut.
+        </p>
+
+        <iframe
+          class="sheet-frame"
+          src="GANTI_URL_SPREADSHEET_SIMPAN_PINJAM"
+          loading="lazy"
+          title="Spreadsheet Simpan Pinjam Kelompok">
+        </iframe>
+
+        <p class="note">
+          Ganti <code>GANTI_URL_SPREADSHEET_SIMPAN_PINJAM</code> dengan kode embed Google Spreadsheet Simpan Pinjam.
+        </p>
+      </section>
+
+    </div>
+
+    <!-- ================= IURAN KELOMPOK ================= -->
+    <div id="iuran-kelompok" class="tab-content">
+
+      <section class="section">
+        <h2 class="section-title">🧾 Formulir Iuran Kelompok</h2>
+        <p class="section-desc">
+          Isi data pembayaran iuran bulanan, iuran kegiatan, atau iuran anggota kelompok.
+        </p>
+
+        <iframe
+          class="form-frame"
+          src="GANTI_URL_FORM_IURAN_KELOMPOK"
+          loading="lazy"
+          title="Formulir Iuran Kelompok">
+        </iframe>
+
+        <p class="note">
+          Ganti <code>GANTI_URL_FORM_IURAN_KELOMPOK</code> dengan kode embed Google Form Iuran Kelompok.
+        </p>
+      </section>
+
+      <section class="section">
+        <h2 class="section-title">📋 Spreadsheet Iuran Kelompok</h2>
+        <p class="section-desc">
+          Rekap pembayaran dan status iuran kelompok akan tampil pada tabel berikut.
+        </p>
+
+        <iframe
+          class="sheet-frame"
+          src="GANTI_URL_SPREADSHEET_IURAN_KELOMPOK"
+          loading="lazy"
+          title="Spreadsheet Iuran Kelompok">
+        </iframe>
+
+        <p class="note">
+          Ganti <code>GANTI_URL_SPREADSHEET_IURAN_KELOMPOK</code> dengan kode embed Google Spreadsheet Iuran Kelompok.
+        </p>
+      </section>
+
+    </div>
+
+    <!-- ================= REKAP KAS ================= -->
+    <div id="rekap-kas" class="tab-content">
+
+      <section class="section">
+        <h2 class="section-title">📊 Formulir Rekap Kas</h2>
+        <p class="section-desc">
+          Isi data pemasukan, pengeluaran, saldo, atau catatan kas kelompok.
+        </p>
+
+        <iframe
+          class="form-frame"
+          src="GANTI_URL_FORM_REKAP_KAS"
+          loading="lazy"
+          title="Formulir Rekap Kas">
+        </iframe>
+
+        <p class="note">
+          Ganti <code>GANTI_URL_FORM_REKAP_KAS</code> dengan kode embed Google Form Rekap Kas.
+        </p>
+      </section>
+
+      <section class="section">
+        <h2 class="section-title">📋 Spreadsheet Rekap Kas</h2>
+        <p class="section-desc">
+          Rekap pemasukan, pengeluaran, dan saldo kas kelompok akan tampil pada tabel berikut.
+        </p>
+
+        <iframe
+          class="sheet-frame"
+          src="GANTI_URL_SPREADSHEET_REKAP_KAS"
+          loading="lazy"
+          title="Spreadsheet Rekap Kas">
+        </iframe>
+
+        <p class="note">
+          Ganti <code>GANTI_URL_SPREADSHEET_REKAP_KAS</code> dengan kode embed Google Spreadsheet Rekap Kas.
+        </p>
+      </section>
+
+    </div>
+
+    <footer>
+      &copy; Kas Kelompok — Simpan Pinjam, Iuran &amp; Rekap Kas
+    </footer>
+
+  </div>
+
+  <script>
+    function bukaTab(idTab, tombol) {
+      const semuaTab = document.querySelectorAll(".tab-content");
+      const semuaTombol = document.querySelectorAll(".tab-button");
+
+      semuaTab.forEach(function(tab) {
+        tab.classList.remove("active");
+      });
+
+      semuaTombol.forEach(function(btn) {
+        btn.classList.remove("active");
+      });
+
+      document.getElementById(idTab).classList.add("active");
+      tombol.classList.add("active");
+
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+    }
+  </script>
+</body>
+</html>
