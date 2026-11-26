@@ -1,176 +1,160 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Form Pengisian, Spreadsheet & Looker Studio</title>
-<style>
-  * { margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI', system-ui, sans-serif; }
-  body {
-    min-height:100vh;
-    background:linear-gradient(135deg,#fff6e5,#ffe3f1,#e3f2ff);
-    color:#333;
-    overflow-x:hidden;
-    padding:40px 20px;
-  }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard Pengisian Form</title>
+  <style>
+    * { box-sizing: border-box; font-family:'Segoe UI', system-ui, sans-serif; }
+    body {
+      margin: 0;
+      min-height:100vh;
+      background:linear-gradient(135deg,#fff6e5,#ffe3f1,#e3f2ff);
+      color:#333;
+      overflow-x:hidden;
+      padding:40px 20px;
+    }
 
-  .bubble {
-    position:fixed;
-    border-radius:50%;
-    opacity:.35;
-    animation:float 8s ease-in-out infinite;
-    z-index:0;
-  }
-  @keyframes float {
-    0%,100% { transform:translateY(0); }
-    50% { transform:translateY(-25px); }
-  }
+    .bubble {
+      position:fixed;
+      border-radius:50%;
+      opacity:.35;
+      animation:float 8s ease-in-out infinite;
+      z-index:0;
+    }
+    @keyframes float {
+      0%,100% { transform:translateY(0); }
+      50% { transform:translateY(-25px); }
+    }
 
-  .container {
-    position:relative;
-    z-index:1;
-    max-width:1100px;
-    margin:0 auto;
-  }
+    header {
+      position:relative;
+      z-index:1;
+      max-width:1200px;
+      margin:0 auto 35px;
+      background:#ffffffcc;
+      backdrop-filter:blur(8px);
+      border-radius:24px;
+      box-shadow:0 8px 30px rgba(0,0,0,.08);
+      padding:35px 25px;
+      text-align:center;
+      animation:pop 1s ease;
+    }
+    @keyframes pop {
+      from { transform:scale(.9); opacity:0; }
+      to { transform:scale(1); opacity:1; }
+    }
 
-  header {
-    text-align:center;
-    margin-bottom:35px;
-    animation:pop 1s ease;
-  }
-  @keyframes pop {
-    from { transform:scale(.9); opacity:0; }
-    to { transform:scale(1); opacity:1; }
-  }
+    header h1 {
+      margin:0 0 8px;
+      font-size:2.2rem;
+      color:#ff6b9d;
+    }
+    header p {
+      margin:0;
+      color:#7a6a8a;
+    }
 
-  h1 { color:#ff6b9d; font-size:2.2rem; margin-bottom:8px; }
-  .tagline { color:#7a6a8a; }
+    main {
+      position:relative;
+      z-index:1;
+      max-width:1200px;
+      margin:0 auto;
+    }
 
-  .card {
-    background:#ffffffcc;
-    backdrop-filter:blur(8px);
-    border-radius:24px;
-    box-shadow:0 8px 30px rgba(0,0,0,.08);
-    padding:30px 25px;
-    margin-bottom:30px;
-    animation:rise .8s ease both;
-  }
-  @keyframes rise {
-    from { opacity:0; transform:translateY(30px); }
-    to { opacity:1; transform:translateY(0); }
-  }
+    .action-card,
+    .panel {
+      background:#ffffffcc;
+      backdrop-filter:blur(8px);
+      border-radius:24px;
+      box-shadow:0 8px 30px rgba(0,0,0,.08);
+      padding:30px 25px;
+      margin-bottom:30px;
+      animation:rise .8s ease both;
+    }
+    @keyframes rise {
+      from { opacity:0; transform:translateY(30px); }
+      to { opacity:1; transform:translateY(0); }
+    }
 
-  h2 { color:#7c4dff; font-size:1.45rem; margin-bottom:8px; text-align:center; }
-  .desc { color:#7a6a8a; text-align:center; margin-bottom:22px; }
+    .action-card {
+      text-align:center;
+    }
 
-  .form-grid {
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-    gap:16px;
-  }
+    h2 {
+      margin:0 0 10px;
+      font-size:1.45rem;
+      color:#7c4dff;
+    }
+    .action-card p,
+    .note {
+      color:#7a6a8a;
+    }
 
-  label {
-    display:block;
-    font-weight:600;
-    color:#6b5b7b;
-    margin-bottom:6px;
-  }
-  input, select, textarea {
-    width:100%;
-    padding:12px 14px;
-    border:2px solid #ffd6e8;
-    border-radius:12px;
-    font-size:1rem;
-    background:#fff;
-    color:#333;
-    outline:none;
-    transition:.2s;
-  }
-  input:focus, select:focus, textarea:focus {
-    border-color:#ff6b9d;
-    box-shadow:0 0 0 4px rgba(255,107,157,.15);
-  }
-  textarea { min-height:110px; resize:vertical; }
+    .btn {
+      display:inline-block;
+      background:#fff;
+      color:#ff6b9d;
+      text-decoration:none;
+      padding:15px 30px;
+      border-radius:999px;
+      font-size:1.05rem;
+      font-weight:600;
+      box-shadow:0 4px 12px rgba(0,0,0,.08);
+      transition:.25s;
+    }
+    .btn:hover {
+      background:#ff6b9d;
+      color:#fff;
+      transform:translateY(-3px);
+      box-shadow:0 10px 20px rgba(255,107,157,.25);
+    }
 
-  .full { grid-column:1 / -1; }
+    .window {
+      width:100%;
+      height:620px;
+      border:0;
+      border-radius:16px;
+      background:#fff;
+      box-shadow:0 4px 14px rgba(0,0,0,.06);
+    }
 
-  .btn {
-    display:inline-block;
-    border:0;
-    cursor:pointer;
-    background:#ff6b9d;
-    color:#fff;
-    font-weight:600;
-    font-size:1.05rem;
-    padding:15px 30px;
-    border-radius:999px;
-    box-shadow:0 6px 16px rgba(255,107,157,.3);
-    transition:.25s;
-  }
-  .btn:hover {
-    background:#e8578a;
-    transform:translateY(-3px);
-  }
-  .btn-secondary {
-    background:#fff;
-    color:#7c4dff;
-    box-shadow:0 4px 12px rgba(0,0,0,.08);
-  }
-  .btn-secondary:hover {
-    background:#7c4dff;
-    color:#fff;
-  }
-  .actions {
-    text-align:center;
-    margin-top:22px;
-    display:flex;
-    gap:12px;
-    justify-content:center;
-    flex-wrap:wrap;
-  }
+    .note {
+      font-size:.92rem;
+      margin-top:12px;
+      line-height:1.6;
+    }
+    .note code {
+      background:#fff3c4;
+      color:#c05621;
+      padding:2px 7px;
+      border-radius:7px;
+    }
 
-  .success {
-    display:none;
-    margin-top:18px;
-    padding:14px 18px;
-    background:#e6fffa;
-    border-left:6px solid #38b2ac;
-    border-radius:12px;
-    color:#236b66;
-    font-weight:600;
-    text-align:center;
-  }
-  .success.show { display:block; animation:pop .4s ease; }
+    footer {
+      position:relative;
+      z-index:1;
+      text-align:center;
+      padding:20px;
+      color:#8a7a9a;
+      font-size:.9rem;
+    }
+    .emoji {
+      display:inline-block;
+      animation:bounce 1.5s infinite;
+    }
+    @keyframes bounce {
+      0%,100% { transform:translateY(0); }
+      50% { transform:translateY(-8px); }
+    }
 
-  .frame-wrap {
-    height:620px;
-    padding:0 5px 5px;
-  }
-  iframe {
-    width:100%;
-    height:100%;
-    border:0;
-    border-radius:16px;
-    background:#fff;
-  }
-
-  footer {
-    text-align:center;
-    margin-top:35px;
-    color:#8a7a9a;
-  }
-  .emoji { display:inline-block; animation:bounce 1.5s infinite; }
-  @keyframes bounce {
-    0%,100% { transform:translateY(0); }
-    50% { transform:translateY(-8px); }
-  }
-
-  @media (max-width:480px) {
-    h1 { font-size:1.7rem; }
-    .frame-wrap { height:520px; }
-    .card { padding:24px 18px; }
-  }
-</style>
+    @media (max-width:480px) {
+      body { padding:24px 14px; }
+      header h1 { font-size:1.7rem; }
+      .window { height:520px; }
+      .action-card, .panel { padding:24px 18px; }
+    }
+  </style>
 </head>
 <body>
 
@@ -178,112 +162,51 @@
 <div class="bubble" style="width:50px;height:50px;background:#d6eaff;top:30%;right:8%;animation-delay:1s"></div>
 <div class="bubble" style="width:100px;height:100px;background:#fff3c4;bottom:10%;left:15%;animation-delay:2s"></div>
 
-<div class="container">
   <header>
-    <h1>Form Pengisian, Spreadsheet &amp; Looker Studio <span class="emoji">🌸</span></h1>
-    <p class="tagline">Isi formulir di bawah, lalu lihat data dan visualisasinya pada Spreadsheet serta Looker Studio.</p>
+    <h1>Dashboard Pengisian Form <span class="emoji">🌸</span></h1>
+    <p>Isi form, lihat data spreadsheet, dan pantau visualisasi Looker Studio.</p>
   </header>
 
-  <section class="card">
-    <h2>📝 Form Pengisian Biodata</h2>
-    <p class="desc">Silakan lengkapi data berikut dengan benar.</p>
+  <main>
+    <section class="action-card">
+      <h2>Menu Pengisian</h2>
+      <p>Tekan tombol di bawah untuk membuka halaman pengisian form.</p>
+      <a class="btn" href="form.html">Buka Form Pengisian</a>
+    </section>
 
-    <form id="biodataForm">
-      <div class="form-grid">
-        <div>
-          <label for="nama">Nama Lengkap</label>
-          <input type="text" id="nama" name="nama" placeholder="Masukkan nama lengkap" required>
-        </div>
-
-        <div>
-          <label for="nim">NIM</label>
-          <input type="text" id="nim" name="nim" placeholder="Masukkan NIM" required>
-        </div>
-
-        <div>
-          <label for="email">Email</label>
-          <input type="email" id="email" name="email" placeholder="Masukkan email aktif" required>
-        </div>
-
-        <div>
-          <label for="telepon">Nomor Telepon</label>
-          <input type="tel" id="telepon" name="telepon" placeholder="Masukkan nomor telepon" required>
-        </div>
-
-        <div>
-          <label for="jenis_kelamin">Jenis Kelamin</label>
-          <select id="jenis_kelamin" name="jenis_kelamin" required>
-            <option value="">-- Pilih Jenis Kelamin --</option>
-            <option value="Perempuan">Perempuan</option>
-            <option value="Laki-laki">Laki-laki</option>
-          </select>
-        </div>
-
-        <div>
-          <label for="tanggal_lahir">Tanggal Lahir</label>
-          <input type="date" id="tanggal_lahir" name="tanggal_lahir" required>
-        </div>
-
-        <div class="full">
-          <label for="alamat">Alamat Lengkap</label>
-          <textarea id="alamat" name="alamat" placeholder="Masukkan alamat lengkap" required></textarea>
-        </div>
-
-        <div class="full">
-          <label for="hobi">Hobi</label>
-          <input type="text" id="hobi" name="hobi" placeholder="Masukkan hobi Anda">
-        </div>
-      </div>
-
-      <div class="actions">
-        <button type="submit" class="btn">Kirim Data</button>
-        <button type="reset" class="btn btn-secondary">Reset Form</button>
-      </div>
-
-      <div class="success" id="successMessage">
-        ✅ Data berhasil dikirim! Silakan periksa Google Spreadsheet untuk melihat data yang masuk.
-      </div>
-    </form>
-  </section>
-
-  <section class="card">
-    <h2>📊 Google Spreadsheet</h2>
-    <p class="desc">Data jawaban dari form pengisian biodata.</p>
-    <div class="frame-wrap">
+    <section class="panel">
+      <h2>Spreadsheet Hasil Pengisian</h2>
       <iframe
-        src="MASUKKAN_LINK_GOOGLE_SPREADSHEET_ANDA"
-        title="Google Spreadsheet"
+        class="window"
+        src="GANTI_DENGAN_URL_EMBED_GOOGLE_SHEETS"
+        title="Spreadsheet hasil pengisian form"
         loading="lazy">
       </iframe>
-    </div>
-  </section>
+      <p class="note">
+        Ganti <code>GANTI_DENGAN_URL_EMBED_GOOGLE_SHEETS</code> dengan kode embed dari
+        Google Sheets: <strong>File &gt; Share &gt; Publish to web &gt; Embed</strong>.
+      </p>
+    </section>
 
-  <section class="card">
-    <h2>📈 Looker Studio</h2>
-    <p class="desc">Visualisasi data dari Google Spreadsheet.</p>
-    <div class="frame-wrap">
+    <section class="panel">
+      <h2>Looker Studio</h2>
       <iframe
-        src="MASUKKAN_LINK_EMBED_LOOKER_STUDIO_ANDA"
-        title="Looker Studio"
-        loading="lazy">
+        class="window"
+        src="GANTI_DENGAN_URL_EMBED_LOOKER_STUDIO"
+        title="Dashboard Looker Studio"
+        loading="lazy"
+        allowfullscreen>
       </iframe>
-    </div>
-  </section>
+      <p class="note">
+        Ganti <code>GANTI_DENGAN_URL_EMBED_LOOKER_STUDIO</code> dengan kode embed dari
+        Looker Studio: <strong>File &gt; Embed report &gt; Enable embedding &gt; Copy</strong>.
+      </p>
+    </section>
+  </main>
 
-  <footer>Dibuat dengan <span class="emoji">💖</span> oleh Nurul Hasanah</footer>
-</div>
-
-<script>
-  const form = document.getElementById('biodataForm');
-  const successMessage = document.getElementById('successMessage');
-
-  form.addEventListener('submit', function(event) {
-    event.preventDefault();
-    successMessage.classList.add('show');
-    form.reset();
-    successMessage.scrollIntoView({ behavior:'smooth', block:'center' });
-  });
-</script>
+  <footer>
+    Dashboard pengisian form • Spreadsheet • Looker Studio <span class="emoji">💖</span>
+  </footer>
 
 </body>
 </html>
