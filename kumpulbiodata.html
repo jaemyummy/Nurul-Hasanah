@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Form, Spreadsheet & Dashboard</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: #f4f6f8;
+      color: #202124;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 24px 16px 48px;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    header h1 {
+      margin: 0 0 8px;
+      font-size: 28px;
+      color: #1a73e8;
+    }
+
+    header p {
+      margin: 0;
+      color: #5f6368;
+    }
+
+    .card {
+      background: #ffffff;
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 24px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+
+    .section-title h2 {
+      margin: 0;
+      font-size: 20px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #1a73e8;
+      color: #ffffff;
+      border: none;
+      border-radius: 8px;
+      padding: 12px 20px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+
+    .button:hover {
+      background: #1557b0;
+    }
+
+    .button.secondary {
+      background: #5f6368;
+    }
+
+    .button.secondary:hover {
+      background: #3c4043;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .window {
+      border: 1px solid #dadce0;
+      border-radius: 10px;
+      overflow: hidden;
+      background: #ffffff;
+    }
+
+    iframe {
+      display: block;
+      width: 100%;
+      border: 0;
+    }
+
+    .form-frame {
+      height: 900px;
+    }
+
+    .sheet-frame {
+      height: 650px;
+    }
+
+    .looker-frame {
+      height: 750px;
+    }
+
+    .note {
+      font-size: 14px;
+      color: #5f6368;
+      margin-top: 10px;
+    }
+
+    @media (max-width: 768px) {
+      .form-frame {
+        height: 1100px;
+      }
+
+      .sheet-frame,
+      .looker-frame {
+        height: 600px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Form Pengisian, Data & Dashboard</h1>
+      <p>Isi form, lihat data pada spreadsheet, lalu pantau visualisasi di Looker Studio.</p>
+    </header>
+
+    <!-- 1. BUTTON FORM PENGISIAN -->
+    <section class="card">
+      <div class="section-title">
+        <h2>Form Pengisian</h2>
+        <button id="toggleFormButton" class="button" onclick="toggleSection('formSection', this)">
+          Buka Form Pengisian
+        </button>
+      </div>
+
+      <div id="formSection" class="hidden">
+        <div class="window">
+          <!-- GANTI URL DI BAWAH DENGAN LINK EMBED GOOGLE FORM ANDA -->
+          <iframe
+            class="form-frame"
+            src="https://docs.google.com/forms/d/e/FORM_ID/viewform?embedded=true"
+            title="Google Form Pengisian"
+            loading="lazy"
+          ></iframe>
+        </div>
+        <p class="note">
+          Klik tombol di atas untuk menampilkan atau menyembunyikan form. Data yang dikirim akan otomatis masuk ke Google Form dan spreadsheet respons jika telah dihubungkan.
+        </p>
+      </div>
+    </section>
+
+    <!-- 2. SPREADSHEET HASIL GFORM -->
+    <section class="card">
+      <div class="section-title">
+        <h2>Spreadsheet Hasil Pengisian</h2>
+        <button class="button secondary" onclick="openInNewTab('https://docs.google.com/spreadsheets/d/SPREADSHEET_ID/edit#gid=0')">
+          Buka Spreadsheet
+        </button>
+      </div>
+
+      <div class="window">
+        <!-- GANTI SPREADSHEET_ID DENGAN ID GOOGLE SHEETS ANDA -->
+        <iframe
+          class="sheet-frame"
+          src="https://docs.google.com/spreadsheets/d/SPREADSHEET_ID/edit#gid=0"
+          title="Spreadsheet Hasil Google Form"
+          loading="lazy"
+        ></iframe>
+      </div>
+
+      <p class="note">
+        Pastikan Google Sheet dibagikan sebagai <strong>“Anyone with the link can view”</strong> agar dapat ditampilkan di halaman ini.
+      </p>
+    </section>
+
+    <!-- 3. LOOKER STUDIO -->
+    <section class="card">
+      <div class="section-title">
+        <h2>Dashboard Looker Studio</h2>
+        <button class="button secondary" onclick="openInNewTab('https://lookerstudio.google.com/reporting/LOOKER_REPORT_ID')">
+          Buka Looker Studio
+        </button>
+      </div>
+
+      <div class="window">
+        <!-- GANTI LOOKER_REPORT_ID DENGAN ID REPORT LOOKER STUDIO ANDA -->
+        <iframe
+          class="looker-frame"
+          src="https://lookerstudio.google.com/reporting/LOOKER_REPORT_ID/page/PAGE_ID"
+          title="Dashboard Looker Studio"
+          loading="lazy"
+          allowfullscreen
+        ></iframe>
+      </div>
+
+      <p class="note">
+        Di Looker Studio, gunakan <strong>Share &gt; Embed report &gt; Enable embedding &gt; Copy embed code</strong>, lalu ganti URL pada iframe di atas dengan kode embed yang diberikan Google. [2][4]
+      </p>
+    </section>
+  </div>
+
+  <script>
+    function toggleSection(sectionId, button) {
+      const section = document.getElementById(sectionId);
+      const isHidden = section.classList.contains("hidden");
+
+      section.classList.toggle("hidden");
+
+      button.textContent = isHidden ? "Tutup Form Pengisian" : "Buka Form Pengisian";
+    }
+
+    function openInNewTab(url) {
+      window.open(url, "_blank", "noopener,noreferrer");
+    }
+  </script>
+</body>
+</html>
